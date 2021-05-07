@@ -1,7 +1,20 @@
-import json
+from class_conexion_api import Conexion_api
 from websocket import create_connection
+from datetime import datetime
+import json
+
+miApi = Conexion_api()
+miDateTime = datetime.now()
+eldatetime = str(miDateTime)
 
 class Websockets:
+    
+    id_user = miApi.GetUsuario()
+    
+    def myconverter():
+        if isinstance(datetime.now):
+            return __str__()
+    
     def send_message(self):
         ws = create_connection("ws://invernanderointeligente.herokuapp.com/adonis-ws")
         ws.send(json.dumps({
@@ -19,16 +32,22 @@ class Websockets:
         "d":{
         "topic":"chat",
         "event":"message",
-        "data":"14"
+        "data": self.id_user
         }
         }))
-
+        
+        print("id_user:", self.id_user)
+        print(miDateTime)
+        
         ws.send(json.dumps({
         "t":7,
         "d":{
         "topic":"chat",
         "event":"message",
-        "data":"EDUARDO Y LUIS NOBIOS"
+        "data": ("NUEVO BARRIDO: ", eldatetime)
         }
         }))
         print("Received '%s'")
+        
+misocket = Websockets()
+misocket.send_message()

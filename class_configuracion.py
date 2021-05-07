@@ -82,12 +82,12 @@ class Configuracion(object):
         print("Temp. Actual: ",self.tempActual)
         
         if self.GetTemperaturaActual() > self.tempEstablecida:
-            self.estadoClima =+ 1
+            self.estadoClima = "SI"
             self.ActivarAire()
-            print("Aire por 40 segundos")
+            print("Aire frio 40 segundos")
         elif self.GetTemperaturaActual() < self.tempEstablecida:
-            self.estadoClima =+ 2
-            print("Aire caliente por 5 segundos")
+            self.estadoClima = "NO"
+            print("Sin aire")
         
     def GetEstadoClima(self):
       return self.estadoClima
@@ -95,10 +95,9 @@ class Configuracion(object):
 
     def ControlHumedadActual(self):
         if self.GetHumedadActual() > self.humEstablecida:
-            self.estadoBomba =+ 0
-            print("Todo bien")
+            self.estadoBomba = "NO"
         elif self.GetHumedadActual() < self.humEstablecida:
-            self.estadoBomba =+ 1
+            self.estadoBomba = "SI"
             print("Hum. Establecida: ",self.humEstablecida)
             print("Hum. Actual: ",self.humedadActual)
             self.ActivarRegado()
@@ -137,5 +136,5 @@ class Configuracion(object):
 
         data = miApi.GetUsuario()
 
-        miApi.Post(self.GetTemperaturaActual(), self.GetHumedadActual(), "SI", "NO")
+        miApi.Post(self.GetTemperaturaActual(), self.GetHumedadActual(), self.GetEstadoClima(), self.GetEstadoBomba())
         print("Post enviado")

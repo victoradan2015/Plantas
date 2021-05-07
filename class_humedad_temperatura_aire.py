@@ -17,6 +17,7 @@ class Humedad_Temperatura:
         # initialize GPIO
         GPIO.setwarnings(True)
         GPIO.setmode(GPIO.BCM)
+        
 
         # read data using pin 14
         #GPIO
